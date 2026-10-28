@@ -1,0 +1,23 @@
+SIMPLE_WRENCH:
+  name: "&6Simple Wrench"
+  type: "&7Tool"
+  description:
+    - "&eRight-Click to quickly dismantle cargo, capacitors, and machines"
+
+SIMPLE_SIEVE:
+  name: "&6Simple Sieve"
+  type: "&7Machine"
+  description:
+    - "&7Sifts gravel into dusts and materials"
+
+SIMPLE_ELEVATOR:
+  name: "&fSimple Elevator"
+  type: "&7Transport"
+  description:
+    - "&7Crouch to go down, Jump to go up"
+
+SIMPLE_WORKBENCH:
+  name: "&6Simple Workbench"
+  type: "&7Crafting Station"
+  description:
+    - "&7Can craft both vanilla and slimefun recipes"

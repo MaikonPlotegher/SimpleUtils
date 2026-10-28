@@ -1,0 +1,23 @@
+SIMPLE_WRENCH:
+  name: "&6Chave Inglesa Simples"
+  type: "&7Ferramenta"
+  description:
+    - "&eClique com o botão direito para desmontar cargas, capacitores e máquinas rapidamente"
+
+SIMPLE_SIEVE:
+  name: "&6Peneira Simples"
+  type: "&7Máquina"
+  description:
+    - "&7Peneira cascalho em pós e materiais"
+
+SIMPLE_ELEVATOR:
+  name: "&fElevador Simples"
+  type: "&7Transporte"
+  description:
+    - "&7Agache para descer, pule para subir"
+
+SIMPLE_WORKBENCH:
+  name: "&6Bancada de Trabalho Simples"
+  type: "&7Estação de Criação"
+  description:
+    - "&7Pode criar receitas vanilla e slimefun"

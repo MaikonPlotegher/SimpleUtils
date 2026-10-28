@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import io.github.mooy1.simpleutils.SimpleUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -18,14 +20,12 @@ import org.bukkit.inventory.ItemStack;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
-import io.github.mooy1.infinitylib.common.Events;
-import io.github.mooy1.simpleutils.SimpleUtils;
-import io.github.thebusybiscuit.slimefun4.api.items.ItemGroup;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItem;
-import io.github.thebusybiscuit.slimefun4.api.items.SlimefunItemStack;
-import io.github.thebusybiscuit.slimefun4.api.recipes.RecipeType;
-import io.github.thebusybiscuit.slimefun4.core.handlers.BlockBreakHandler;
-import io.github.thebusybiscuit.slimefun4.utils.tags.SlimefunTag;
+import io.github.thebusybiscuit.slimefun5.api.items.ItemGroup;
+import io.github.thebusybiscuit.slimefun5.api.items.SlimefunItem;
+import io.github.thebusybiscuit.slimefun5.api.items.SlimefunItemStack;
+import io.github.thebusybiscuit.slimefun5.api.recipes.RecipeType;
+import io.github.thebusybiscuit.slimefun5.core.handlers.BlockBreakHandler;
+import io.github.thebusybiscuit.slimefun5.utils.tags.SlimefunTag;
 import me.mrCookieSlime.CSCoreLibPlugin.Configuration.Config;
 import me.mrCookieSlime.Slimefun.Objects.handlers.BlockTicker;
 import me.mrCookieSlime.Slimefun.api.BlockStorage;
@@ -33,11 +33,10 @@ import me.mrCookieSlime.Slimefun.api.BlockStorage;
 public final class Elevator extends SlimefunItem implements Listener {
 
     private final BiMap<Location, Location> locations = HashBiMap.create();
+    private int tickCount = 0;
 
     public Elevator(ItemGroup category, SlimefunItemStack item, RecipeType recipeType, ItemStack[] recipe) {
         super(category, item, recipeType, recipe);
-
-        Events.registerListener(this);
 
         addItemHandler(new BlockBreakHandler(false, false) {
             @Override
@@ -56,7 +55,7 @@ public final class Elevator extends SlimefunItem implements Listener {
 
             @Override
             public void tick(Block block, SlimefunItem slimefunItem, Config config) {
-                if (SimpleUtils.slimefunTickCount() % 16 == 0 && block.getY() > block.getWorld().getMinHeight()) {
+                if (++tickCount % 16 == 0 && block.getY() > block.getWorld().getMinHeight()) {
                     Material type = block.getRelative(0, -1, 0).getType();
                     if (type.isOccluding() && !SlimefunTag.UNBREAKABLE_MATERIALS.isTagged(type)) {
                         block.setType(type);
@@ -122,4 +121,8 @@ public final class Elevator extends SlimefunItem implements Listener {
         }
     }
 
+    public void register(SimpleUtils plugin) {
+        super.register(plugin);
+        Bukkit.getPluginManager().registerEvents(this, plugin);
+    }
 }
